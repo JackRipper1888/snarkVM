@@ -3270,6 +3270,7 @@ dependencies = [
  "rayon",
  "serde_json",
  "snarkvm-algorithms",
+ "snarkvm-circuit",
  "snarkvm-console",
  "snarkvm-ledger-puzzle-epoch",
 ]

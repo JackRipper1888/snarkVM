@@ -22,10 +22,11 @@ use console::{
     network::{MainnetV0, Network},
 };
 use snarkvm_ledger_puzzle::{Puzzle, PuzzleSolutions};
-use snarkvm_ledger_puzzle_epoch::MerklePuzzle;
+use snarkvm_ledger_puzzle_epoch::SynthesisPuzzle;
 
 use criterion::Criterion;
 use rand::{self, thread_rng, CryptoRng, RngCore};
+use snarkvm_circuit::v0::AleoV0;
 
 fn sample_address_and_counter(rng: &mut (impl CryptoRng + RngCore)) -> (Address<MainnetV0>, u64) {
     let private_key = PrivateKey::new(rng).unwrap();
@@ -38,7 +39,7 @@ fn puzzle_prove(c: &mut Criterion) {
     let rng = &mut thread_rng();
 
     // Initialize a new puzzle.
-    let puzzle = Puzzle::<MainnetV0>::new::<MerklePuzzle<MainnetV0>>();
+    let puzzle = Puzzle::<MainnetV0>::new::<SynthesisPuzzle<MainnetV0, AleoV0>>();
 
     // Initialize an epoch hash.
     let epoch_hash = rng.gen();
@@ -53,7 +54,7 @@ fn puzzle_verify(c: &mut Criterion) {
     let rng = &mut thread_rng();
 
     // Initialize a new puzzle.
-    let puzzle = Puzzle::<MainnetV0>::new::<MerklePuzzle<MainnetV0>>();
+    let puzzle = Puzzle::<MainnetV0>::new::<SynthesisPuzzle<MainnetV0, AleoV0>>();
 
     // Initialize an epoch hash.
     let epoch_hash = rng.gen();
